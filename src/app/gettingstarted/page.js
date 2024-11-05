@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { useTheme } from '@/app/assets/ThemeContext';
-import Step1 from '@/components/forms/Step1';
-import Step2 from '@/components/forms/Step2';
-import Step3 from '@/components/forms/Step3';
-import Step4 from '@/components/forms/Step4';
-import ThankYouStep from '@/components/forms/ThankYouStep';
+import Step1 from '@/components/step1';
+import Step2 from '@/components/step2';
+import Step3 from '@/components/step3';
+import Step4 from '@/components/step4';
+import ThankYouStep from '@/components/ThankYouStep';
+
 
 const StepIndicator = ({ currentStep, onStepChange }) => {
   const steps = ['1', '2', '3', '4'];
