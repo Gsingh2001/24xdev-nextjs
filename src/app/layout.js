@@ -6,7 +6,7 @@ import Head from "next/head"; // Import Head component from Next.js
 
 export default function RootLayout({ children }) {
   return (
-    <>
+    <html lang="en">
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,18 +59,20 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        
+
         {/* Performance Optimization - Preconnect/Preload */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;700&display=swap" />
+
       </Head>
-      
-      <ThemeProvider>
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
-      </ThemeProvider>
-    </>
+      <body>
+        <ThemeProvider>
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
