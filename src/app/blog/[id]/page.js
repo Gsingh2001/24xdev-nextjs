@@ -8,10 +8,8 @@ import { useTheme } from '@/app/assets/ThemeContext';
 
 // Dynamically import components
 const RelatedBlogs = React.lazy(() => import('@/components/blogs/RelatedBlogs'));
-const AddComponent = React.lazy(() => import('@/components/blogs/AddComponent'));
 const ShareButton = React.lazy(() => import('@/components/ShareButton'));
 const LikeButton = React.lazy(() => import('@/components/LikeButton'));
-const Comments = React.lazy(() => import('@/components/Comments'));
 
 const SingleNews = ({ params }) => {
   const [post, setPost] = useState(null);
@@ -31,6 +29,13 @@ const SingleNews = ({ params }) => {
       const data = snapshot.val();
       if (data) {
         setPost(data);
+        // Store the data in sessionStorage
+        sessionStorage.setItem('postTitle', data.title);
+        sessionStorage.setItem('postDescription', data.description || limitWords(data.content?.join(' '), 20));
+        sessionStorage.setItem('postImage', data.main_image);
+        sessionStorage.setItem('postDate', data.date);
+        sessionStorage.setItem('postCategory', data.category);
+
         // Fetch related posts by category
         if (data.category) {
           setCategory(data.category); // Set the category for related posts
@@ -46,6 +51,70 @@ const SingleNews = ({ params }) => {
     const plainText = DOMPurify.sanitize(text, { ALLOWED_TAGS: [] });
     return plainText.split(' ').slice(0, limit).join(' ') + (plainText.split(' ').length > limit ? '...' : '');
   };
+
+  // Use sessionStorage to update meta tags when the component mounts
+  useEffect(() => {
+    const title = sessionStorage.getItem('postTitle');
+    const description = sessionStorage.getItem('postDescription');
+    const image = sessionStorage.getItem('postImage');
+    const date = sessionStorage.getItem('postDate');
+    const category = sessionStorage.getItem('postCategory');
+
+    // Set meta tags
+    if (title && description && image) {
+      document.title = title;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.content = description;
+      } else {
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'description';
+        metaTag.content = description;
+        document.head.appendChild(metaTag);
+      }
+
+      // Open Graph meta tags
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) {
+        ogTitle.content = title;
+      } else {
+        const ogTitleTag = document.createElement('meta');
+        ogTitleTag.setAttribute('property', 'og:title');
+        ogTitleTag.content = title;
+        document.head.appendChild(ogTitleTag);
+      }
+
+      const ogDescription = document.querySelector('meta[property="og:description"]');
+      if (ogDescription) {
+        ogDescription.content = description;
+      } else {
+        const ogDescriptionTag = document.createElement('meta');
+        ogDescriptionTag.setAttribute('property', 'og:description');
+        ogDescriptionTag.content = description;
+        document.head.appendChild(ogDescriptionTag);
+      }
+
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) {
+        ogImage.content = image;
+      } else {
+        const ogImageTag = document.createElement('meta');
+        ogImageTag.setAttribute('property', 'og:image');
+        ogImageTag.content = image;
+        document.head.appendChild(ogImageTag);
+      }
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.content = window.location.href;
+      } else {
+        const ogUrlTag = document.createElement('meta');
+        ogUrlTag.setAttribute('property', 'og:url');
+        ogUrlTag.content = window.location.href;
+        document.head.appendChild(ogUrlTag);
+      }
+    }
+  }, []);
 
   if (loading) return <div className="text-center py-12">Loading...</div>;
 
@@ -93,8 +162,6 @@ const SingleNews = ({ params }) => {
               />
             ))}
           </div>
-
-        
         </div>
 
         {/* Right Column - Related Blogs and Advertisement */}
