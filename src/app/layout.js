@@ -15,7 +15,7 @@ export const metadata = {
     title: "24XDEV - Your Trusted Partner in Comprehensive Web Solutions",
     description:
       "24XDEV is committed to delivering tailored web solutions, offering web development, design, hosting, deployment, and maintenance for a strong digital presence.",
-    images: ["/img/main-logo.jpg"],
+    images: ["/img/main-logo.png"],
     url: "https://24xdev.uk",
     type: "website",
     siteName: "24XDEV",
@@ -25,7 +25,7 @@ export const metadata = {
     title: "24XDEV - Your Trusted Partner in Comprehensive Web Solutions",
     description:
       "Discover our suite of services at 24XDEV, dedicated to enhancing your website's performance with custom solutions.",
-    images: ["/img/main-logo.jpg"],
+    images: ["/img/main-logo.png"],
   },
   // Structured Data (JSON-LD) for Organization
   structuredData: {
@@ -33,7 +33,7 @@ export const metadata = {
     "@type": "Organization",
     name: "24XDEV",
     url: "https://24xdev.uk",
-    logo: "/img/main-logo.jpg",
+    logo: "/img/main-logo.png",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+1-800-555-5555",

@@ -5,7 +5,7 @@ const Layout = ({ children, postTitle, postDescription, postImage }) => {
     const [dynamicMetadata, setDynamicMetadata] = useState({
         title: 'Builder.io - Visual Headless CMS',
         description: 'Build digital experiences for any tech stack, visually.',
-        image: postImage || 'default-image.jpg',
+        image: postImage || 'https://picsum.photos/600/400?random=68',
     });
 
     useEffect(() => {
