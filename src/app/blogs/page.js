@@ -4,7 +4,6 @@ import DOMPurify from 'dompurify';
 import Link from 'next/link';
 import { ref, onValue } from "firebase/database"; // Import necessary Firebase functions
 import { useTheme } from '../assets/ThemeContext';
-import PostCarousel from '@/components/blogs/PostCarousel';
 import AdditionalLayout from '@/components/blogs/AdditionalLayout';
 import { db } from '../../../firebase';
 
@@ -22,6 +21,10 @@ const BlogPage = () => {
     onValue(postsRef, (snapshot) => {
       const data = snapshot.val();
       const fetchedPosts = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+      
+      // Sort posts by date in descending order
+      fetchedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      
       setPosts(fetchedPosts);
       setLoading(false);
     });
@@ -67,7 +70,7 @@ const BlogPage = () => {
                 />
                 <div className="flex items-center text-gray-300 text-sm">
                   <div className="h-3 w-1 bg-red-600 mr-2"></div>
-                  {limitWords(posts[0].category[0], 2)}
+                  {limitWords(posts[0].category, 2)}
                 </div>
               </div>
             </div>
@@ -91,7 +94,7 @@ const BlogPage = () => {
                   </Link>
                   <div className="flex items-center text-gray-300 text-xs">
                     <div className="h-3 w-1 bg-red-600 mr-2"></div>
-                    {limitWords(post.category[0], 2)}
+                    {limitWords(post.category, 2)}
                   </div>
                 </div>
               </article>
@@ -99,14 +102,12 @@ const BlogPage = () => {
           </div>
         </div>
         {categories.map((category) => (
-          
             <AdditionalLayout
               key={category.id}
               category={category}
               posts={posts.filter(post => post.category.includes(category.name))}
               limitWords={limitWords}
             />
-    
         ))}
       </div>
     </div>
