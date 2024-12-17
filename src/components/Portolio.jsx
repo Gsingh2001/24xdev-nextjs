@@ -1,6 +1,32 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
 
-const Portfolio = ({ currentTheme } ) => {
+const Portfolio = ({ currentTheme }) => {
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch portfolio data from Firebase Realtime Database
+    const portfolioRef = ref(db, 'portfolio');
+    
+    onValue(portfolioRef, (snapshot) => {
+      const data = snapshot.val();
+      const itemsArray = data ? Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key]
+      })) : [];
+      
+      // Set the portfolio items (only the latest 9 items)
+      setPortfolioItems(itemsArray.slice(0, 9)); // Slice to get only the first 9 items
+      setLoading(false); // Stop loading once data is fetched
+    });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section
@@ -41,7 +67,7 @@ const Portfolio = ({ currentTheme } ) => {
           {portfolioItems.map((item, index) => (
             <div
               key={index}
-              className={`portfolio-item ${item.filter} transition-transform duration-300`}
+              className={`portfolio-item ${item.category.toLowerCase()} transition-transform duration-300`}
               data-wow-delay={item.delay}
               role="tabpanel"
               aria-labelledby={`portfolio-item-${index}`}
@@ -50,8 +76,8 @@ const Portfolio = ({ currentTheme } ) => {
                 
                 {/* Portfolio Image */}
                 <img
-                  src={item.imgSrc}
-                  alt={item.alt}
+                  src={item.imgSrc} // Use `imgSrc` field from Firebase data
+                  alt={item.alt || item.title} // Use `alt` or fallback to `title`
                   className="img-fluid w-full h-64 object-cover"
                   loading="lazy"
                 />
@@ -64,7 +90,7 @@ const Portfolio = ({ currentTheme } ) => {
                   <p className="text-sm">{item.category}</p>
                   <div className="flex space-x-2 mt-2">
                     <a
-                      href={item.imgSrc}
+                      href={item.image} // Link to preview image (or use a custom link)
                       data-lightbox="portfolio"
                       data-title={item.title}
                       className="text-white hover:text-blue-400"
@@ -93,18 +119,5 @@ const Portfolio = ({ currentTheme } ) => {
     </section>
   );
 };
-
-// Portfolio Items Data
-const portfolioItems = [
-  { title: 'App 1', category: 'App', imgSrc: 'img/portfolio/app1.jpg', alt: 'Screenshot of App 1', filter: 'filter-app', delay: '0s' },
-  { title: 'Web 3', category: 'Web', imgSrc: 'img/portfolio/web3.jpg', alt: 'Screenshot of Web 3', filter: 'filter-web', delay: '0.1s' },
-  { title: 'App 2', category: 'App', imgSrc: 'img/portfolio/app2.jpg', alt: 'Screenshot of App 2', filter: 'filter-app', delay: '0.2s' },
-  { title: 'Card 2', category: 'Card', imgSrc: 'img/portfolio/card2.jpg', alt: 'Screenshot of Card 2', filter: 'filter-card', delay: '0s' },
-  { title: 'Web 2', category: 'Web', imgSrc: 'img/portfolio/web2.jpg', alt: 'Screenshot of Web 2', filter: 'filter-web', delay: '0.1s' },
-  { title: 'App 3', category: 'App', imgSrc: 'img/portfolio/app3.jpg', alt: 'Screenshot of App 3', filter: 'filter-app', delay: '0.2s' },
-  { title: 'Card 1', category: 'Card', imgSrc: 'img/portfolio/card1.jpg', alt: 'Screenshot of Card 1', filter: 'filter-card', delay: '0s' },
-  { title: 'Card 3', category: 'Card', imgSrc: 'img/portfolio/card3.jpg', alt: 'Screenshot of Card 3', filter: 'filter-card', delay: '0.1s' },
-  { title: 'Web 1', category: 'Web', imgSrc: 'img/portfolio/web1.jpg', alt: 'Screenshot of Web 1', filter: 'filter-web', delay: '0.2s' },
-];
 
 export default Portfolio;

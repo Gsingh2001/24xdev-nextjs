@@ -24,7 +24,7 @@ export default function Home() {
       <CallToAction currentTheme={currentTheme} />
       <Features currentTheme={currentTheme} />
       <Portfolio currentTheme={currentTheme} />
-      <Pricing currentTheme={currentTheme} />
+      {/* <Pricing currentTheme={currentTheme} /> */}
       <FAQ currentTheme={currentTheme} />
       <Testimonials currentTheme={currentTheme} />
       <IntroductionToCEO currentTheme={currentTheme} />

@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,10 +9,22 @@ const NavBar = () => {
   const { isDarkMode, toggleDarkMode, currentTheme } = useTheme(); // Get the theme context
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null); // Reference for the mobile menu
+  const [hasCheckedPreference, setHasCheckedPreference] = useState(false); // To track if the preference has been applied
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  // Apply dark mode preference on first load
+  useEffect(() => {
+    if (!hasCheckedPreference) {
+      const userPreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (userPreference !== isDarkMode) {
+        toggleDarkMode();
+      }
+      setHasCheckedPreference(true); // Ensure this only runs once
+    }
+  }, [hasCheckedPreference, isDarkMode, toggleDarkMode]);
 
   // Close mobile menu if clicked outside
   useEffect(() => {

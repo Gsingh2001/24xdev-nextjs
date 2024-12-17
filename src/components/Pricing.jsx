@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Pricing = ( { currentTheme }) => {
@@ -66,15 +67,15 @@ const PricingCard = ({ price, period, title, features, currentTheme }) => {
         </ul>
 
         {/* Call to Action Button */}
-        <a
-          href="#"
+        <Link
+          href="/gettingstarted"
           className={`mt-4 inline-block px-4 py-2 rounded text-center ${
             isDarkMode ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-600 hover:bg-blue-500'
           } text-white transition duration-200`}
           aria-label={`Choose ${title} Plan`}
         >
           Choose Plan
-        </a>
+        </Link>
       </div>
     </div>
   );
