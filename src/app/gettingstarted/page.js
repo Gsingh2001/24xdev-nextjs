@@ -1,13 +1,12 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
-
 import { useTheme } from '@/app/assets/ThemeContext';
 import Step1 from '@/components/step1';
 import Step2 from '@/components/step2';
 import Step3 from '@/components/step3';
 import Step4 from '@/components/step4';
 import ThankYouStep from '@/components/ThankYouStep';
-
+import { toast } from 'react-toastify';  // Import toast
 
 const StepIndicator = ({ currentStep, onStepChange }) => {
   const steps = ['1', '2', '3', '4'];
@@ -32,95 +31,102 @@ const StepIndicator = ({ currentStep, onStepChange }) => {
 };
 
 const GettingStarted = () => {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState({
-      services: [],
-      otherService: '',
-      name: '',
-      email: '',
-      contactNumber: '',
-      bestTimeToCall: '',
-      deadlineDate: '',
-      extraInfo: '',
-      currency: 'USD',
-      budget: 0,
-    });
-  
-    const { isDarkMode } = useTheme();
-  
-    useEffect(() => {
-      const storedData = sessionStorage.getItem('formData');
-      if (storedData) {
-        setFormData(JSON.parse(storedData));
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({
+    services: [],
+    otherService: '',
+    name: '',
+    email: '',
+    contactNumber: '',
+    bestTimeToCall: '',
+    deadlineDate: '',
+    extraInfo: '',
+    currency: 'USD',
+    budget: 0,
+  });
+
+  const { isDarkMode } = useTheme();
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem('formData');
+    if (storedData) {
+      setFormData(JSON.parse(storedData));
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem('formData', JSON.stringify(formData));
+  }, [formData]);
+
+  const handleOptionChange = (e) => {
+    const value = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      services: prevData.services.includes(value)
+        ? prevData.services.filter((service) => service !== value)
+        : [...prevData.services, value],
+    }));
+  };
+
+  const handleInputChange = (key, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
+  };
+
+  const handleNext = () => {
+    if (currentStep === 4) {
+      handleSubmit();
+    } else {
+      setCurrentStep((prevStep) => prevStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const handleStepChange = (step) => {
+    setCurrentStep(step);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // Check if email is provided
+      if (!formData.email) {
+        throw new Error('Recipient email is required.');
       }
-    }, []);
-  
-    useEffect(() => {
-      sessionStorage.setItem('formData', JSON.stringify(formData));
-    }, [formData]);
-  
-    const handleOptionChange = (e) => {
-      const value = e.target.value;
-      setFormData((prevData) => ({
-        ...prevData,
-        services: prevData.services.includes(value)
-          ? prevData.services.filter((service) => service !== value)
-          : [...prevData.services, value],
-      }));
-    };
-  
-    const handleInputChange = (key, value) => {
-      setFormData((prevData) => ({
-        ...prevData,
-        [key]: value,
-      }));
-    };
-  
-    const handleNext = () => {
-      if (currentStep === 4) {
-        handleSubmit();
-      } else {
-        setCurrentStep((prevStep) => prevStep + 1);
+
+      const response = await fetch('https://two4xdevbackend.onrender.com/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
-  
-    const handleBack = () => {
-      setCurrentStep((prevStep) => prevStep - 1);
-    };
-  
-    const handleStepChange = (step) => {
-      setCurrentStep(step);
-    };
-  
-    const handleSubmit = async () => {
-      try {
-        const response = await fetch('https://two4xdevbackend.onrender.com/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-  
-        alert('Form submitted successfully!');
-        setCurrentStep(5);
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('There was an error submitting the form. Please try again.');
-      }
-    };
-  
-    return (
-      <div className={`p-6 max-w-2xl mx-auto rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
-        <h2 className="text-2xl font-semibold mb-6 text-center">Getting Started</h2>
-        
+
+      toast.success('Form submitted successfully!'); // Show success toast
+      setCurrentStep(5);
+    } catch (error) {
+      toast.error(`Error: ${error.message}`); // Show error toast with message
+    }
+  };
+
+  return (
+    <div className={`${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
+      <div
+        className={`p-6 max-w-2xl mx-auto rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-900 text-white border border-gray-700' : 'bg-white text-gray-800 border border-gray-300'} h-[90vh] flex flex-col justify-between`}
+      >
+        <h1 className="text-4xl font-semibold text-center">Getting Started</h1>
+
         {/* Step Indicators */}
         <StepIndicator currentStep={currentStep} onStepChange={handleStepChange} />
-  
+
         {currentStep === 1 && (
           <Step1
             services={formData.services}
@@ -156,14 +162,9 @@ const GettingStarted = () => {
             isDarkMode={isDarkMode}
           />
         )}
-        {currentStep === 4 && (
-          <Step4
-            userData={formData}
-            isDarkMode={isDarkMode}
-          />
-        )}
+        {currentStep === 4 && <Step4 userData={formData} isDarkMode={isDarkMode} />}
         {currentStep === 5 && <ThankYouStep />}
-  
+
         {/* Button Container aligned to the right */}
         <div className="mt-6 flex justify-end space-x-2">
           {currentStep > 1 && (
@@ -192,8 +193,8 @@ const GettingStarted = () => {
           )}
         </div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
 
 export default GettingStarted;

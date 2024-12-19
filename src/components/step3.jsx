@@ -34,7 +34,7 @@ const Step3 = ({ bestTimeToCall, setBestTimeToCall, deadlineDate, setDeadlineDat
         className={`mt-1 block w-full border rounded px-2 py-1 ${
           isDarkMode ? 'bg-gray-800 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-800'
         }`}
-        rows="4"
+        rows="2"
         placeholder="Enter any additional information"
       />
     </label>

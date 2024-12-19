@@ -2,6 +2,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import "./globals.css"; // Ensure you have this CSS file for global styles
 import { ThemeProvider } from "./assets/ThemeContext"; // Importing ThemeProvider for theme management
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "24XDEV - Your Trusted Partner in Comprehensive Web Solutions",
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ThemeProvider>
+        <ToastContainer />
           <NavBar />
           <main>{children}</main>
           <Footer />

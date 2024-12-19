@@ -1,15 +1,17 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import usePathname hook
 import Image from "next/image";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useTheme } from "@/app/assets/ThemeContext"; // Replace with your actual ThemeContext path
 
 const NavBar = () => {
-  const { isDarkMode, toggleDarkMode, currentTheme } = useTheme(); // Get the theme context
+  const { isDarkMode, toggleDarkMode, currentTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const mobileMenuRef = useRef(null); // Reference for the mobile menu
-  const [hasCheckedPreference, setHasCheckedPreference] = useState(false); // To track if the preference has been applied
+  const mobileMenuRef = useRef(null);
+  const [hasCheckedPreference, setHasCheckedPreference] = useState(false);
+  const pathname = usePathname(); // Get current route
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -22,7 +24,7 @@ const NavBar = () => {
       if (userPreference !== isDarkMode) {
         toggleDarkMode();
       }
-      setHasCheckedPreference(true); // Ensure this only runs once
+      setHasCheckedPreference(true);
     }
   }, [hasCheckedPreference, isDarkMode, toggleDarkMode]);
 
@@ -42,6 +44,9 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Function to check if link is active
+  const isActive = (link) => pathname === link;
 
   return (
     <nav
@@ -69,26 +74,33 @@ const NavBar = () => {
             <div className="flex space-x-6 me-4">
               <Link
                 href="/"
-                className={`hover:bg-blue-700 ${
-                  isDarkMode ? "text-white" : "text-black"
-                } px-4 py-2 rounded-lg transition hover:text-white`}
+                className={`px-4 py-2 rounded-lg transition ${
+                  isActive("/") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+                }`}
               >
                 Home
               </Link>
               <Link
                 href="/blogs"
-                className={`hover:bg-blue-700 ${
-                  isDarkMode ? "text-white" : "text-black"
-                } px-4 py-2 rounded-lg transition hover:text-white`}
+                className={`px-4 py-2 rounded-lg transition ${
+                  isActive("/blogs") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+                }`}
               >
                 Blogs
               </Link>
               <Link
+                href="/portfolio"
+                className={`px-4 py-2 rounded-lg transition ${
+                  isActive("/portfolio") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+                }`}
+              >
+                Portfolio
+              </Link>
+              <Link
                 href="/gettingstarted"
                 className={`ml-4 p-2 rounded-lg ${
-                  isDarkMode ? "bg-gray-600" : "bg-gray-800"
-                } hover:bg-gray-700 transition`}
-                style={{ color: currentTheme.colors.buttonText }}
+                  isActive("/gettingstarted") ? "bg-blue-700 text-white" : isDarkMode ? "bg-gray-600" : "bg-gray-800 text-white"
+                }`}
               >
                 Getting Started
               </Link>
@@ -103,27 +115,11 @@ const NavBar = () => {
                 checked={isDarkMode}
               />
               <div className="theme-switch__container">
-                {/* Theme switch styles */}
                 <div className="theme-switch__clouds"></div>
-                <div className="theme-switch__stars-container">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 144 55"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="..."
-                      fill="currentColor"
-                    ></path>
-                  </svg>
-                </div>
+                <div className="theme-switch__stars-container"></div>
                 <div className="theme-switch__circle-container">
                   <div className="theme-switch__sun-moon-container">
                     <div className="theme-switch__moon">
-                      <div className="theme-switch__spot"></div>
-                      <div className="theme-switch__spot"></div>
                       <div className="theme-switch__spot"></div>
                     </div>
                   </div>
@@ -153,36 +149,49 @@ const NavBar = () => {
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className={`md:hidden ${
-          mobileMenuOpen ? "block" : "hidden"
-        } ${currentTheme.colors.background}`}
+        className={`md:hidden ${mobileMenuOpen ? "block" : "hidden"} ${currentTheme.colors.background}`}
       >
         <div className="px-4 py-3 space-y-1">
           <Link
             href="/"
-            className={`block hover:bg-blue-700 ${
-              isDarkMode ? "text-white" : "text-black"
-            } px-4 py-2 rounded-lg transition hover:text-white`}
+            className={`block px-4 py-2 rounded-lg transition ${
+              isActive("/") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+            }`}
           >
             Home
           </Link>
           <Link
             href="/blogs"
-            className={`block hover:bg-blue-700 ${
-              isDarkMode ? "text-white" : "text-black"
-            } px-4 py-2 rounded-lg transition hover:text-white`}
+            className={`block px-4 py-2 rounded-lg transition ${
+              isActive("/blogs") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+            }`}
           >
             Blogs
           </Link>
-
+          <Link
+            href="/portfolio"
+            className={`block px-4 py-2 rounded-lg transition ${
+              isActive("/portfolio") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
+            Portfolio
+          </Link>
+          <Link
+            href="/gettingstarted"
+            className={`block px-4 py-2 rounded-lg transition ${
+              isActive("/gettingstarted") ? "bg-blue-700 text-white" : isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
+            Getting Started
+          </Link>
           {/* Mobile Theme Toggle */}
           <button
             onClick={toggleDarkMode}
-            className={`block w-full text-left ${
+            className={`block w-full text-left px-4 py-2 rounded-lg transition ${
               isDarkMode ? "text-white" : "text-black"
-            } px-4 py-2 rounded-lg hover:bg-blue-700 transition`}
+            }`}
           >
-            Toggle Theme
+            {isDarkMode ? "Light Mode" : "Dark Mode"}
           </button>
         </div>
       </div>

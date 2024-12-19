@@ -46,13 +46,13 @@ const PostCarousel = ({ category, posts, limitWords }) => {
                                         backgroundColor: currentTheme.colors.card1.background // Use the theme's card background
                                     }}
                                 >
-                                    <Link href={post.link} className="block group">
+                                    {/* <Link href={post.link} className="block group"> */}
                                         <img
                                             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                                             src={post.main_image}
                                             alt={post.title}
                                         />
-                                    </Link>
+                                    {/* </Link> */}
                                     <div className="p-4">
                                         <h3 
                                             className="text-lg font-bold mb-2 hover:text-red-600 transition duration-300"
@@ -60,20 +60,20 @@ const PostCarousel = ({ category, posts, limitWords }) => {
                                                 color: currentTheme.colors.card1.text // Use the theme's text color
                                             }}
                                         >
-                                            <Link href={post.link}>
+                                            {/* <Link href={post.link}> */}
                                                 {limitWords(post.title, 5)}
-                                            </Link>
+                                            {/* </Link> */}
                                         </h3>
                                         <p className="text-gray-600 text-sm mb-3">
                                             {limitWords(post.description, 15)}
                                         </p>
-                                        <Link
+                                        {/* <Link
                                             className="text-gray-500 text-sm hover:text-red-600 transition duration-300"
                                             href={post.categoryLink}
-                                        >
+                                        > */}
                                             <span className="inline-block h-3 w-1 bg-red-600 mr-2"></span>
                                             {post.category[0]}
-                                        </Link>
+                                        {/* </Link> */}
                                     </div>
                                 </div>
                             </SwiperSlide>
