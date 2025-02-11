@@ -40,7 +40,7 @@ const ImageModal = ({ isOpen, imageSrc, onClose }) => {
   );
 };
 
-const SingleNews = ({ params }) => {
+const SinglePortfolio = ({ params }) => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const { currentTheme } = useTheme();
@@ -99,7 +99,7 @@ const SingleNews = ({ params }) => {
     <div
       className="py-12"
       style={{
-        background: `linear-gradient(180deg, ${currentTheme.colors.background} 50%, #f0f4fa 100%)`,
+        background: currentTheme.colors.background,
       }}
     >
       <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-12">
@@ -135,11 +135,28 @@ const SingleNews = ({ params }) => {
           <div className="mt-8 text-lg leading-relaxed space-y-8" style={{ color: currentTheme.colors.text }}>
             <div>
               <p className="text-lg font-medium">{post.shortDescription}</p>
-              <p>Project Link :- <Link href={post?.projectLink} target="_blank" className="text-sm font-small  hover:underline">{post?.projectLink}</Link></p>
+              <p>Project Link :- <Link href={post?.githubLink} target="_blank" className="text-sm font-small  hover:underline">{post?.githubLink}</Link></p>
             </div>
             <p>{post.description}</p>
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Enhancements</h3>
+                <ul className="list-disc pl-5">
+                  {post.futureEnhancements?.map((enhancement, index) => (
+                    <li key={index}>{enhancement}</li>
+                  ))}
+                </ul>
+
+                <h3 className="text-xl font-semibold mt-4 mb-4">Challenges</h3>
+                <ul className="list-disc pl-5">
+                  {post.challenges?.map((challenge, index) => (
+                    <li key={index}>{challenge}</li>
+                  ))}
+                </ul>
+              </div>
+
+
               <div>
                 <h2 className="text-2xl font-semibold mb-4">Project Details</h2>
                 <p><strong>Client:</strong> {post.client}</p>
@@ -148,8 +165,9 @@ const SingleNews = ({ params }) => {
                 <p><strong>Team Size:</strong> {post.teamSize}</p>
                 <p><strong>Status:</strong> {post.status}</p>
                 <p><strong>Rating:</strong> {post.rating}</p>
-                <p><strong>Technologies:</strong> {post.technologies?.join(", ")}</p>
-                <p><strong>Tags:</strong> {post.tags?.join(", ")}</p>
+                <p><strong>Technologies:</strong> {post.technologies.join(', ')}</p>
+                <p><strong>Tags:</strong> {post.tags.join(', ')}</p>
+
 
                 {/* Add Project Link */}
                 {post.githubLink && (
@@ -168,26 +186,13 @@ const SingleNews = ({ params }) => {
               </div>
 
               {/* Project Highlights */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Highlights</h3>
-                <ul className="list-disc pl-5">
-                  {post.futureEnhancements?.map((enhancement, index) => (
-                    <li key={index}>{enhancement}</li>
-                  ))}
-                </ul>
 
-                <h3 className="text-xl font-semibold mt-4 mb-4">Challenges</h3>
-                <ul className="list-disc pl-5">
-                  {post.challenges?.map((challenge, index) => (
-                    <li key={index}>{challenge}</li>
-                  ))}
-                </ul>
-              </div>
             </div>
-            <div className="mt-10">
+            {post.clientTestimonial > 0 && <div className="mt-10">
               <h3 className="text-xl font-semibold mb-4">Client Testimonial</h3>
               <blockquote className="italic ">"{post.clientTestimonial}"</blockquote>
-            </div>
+            </div>}
+
             <div className="mt-12">
               <h3 className="text-xl font-semibold mb-4">Team Members</h3>
               <div className="grid grid-cols-2 gap-6">
@@ -196,7 +201,7 @@ const SingleNews = ({ params }) => {
                     <img src={member.image} alt={member.name} className="w-12 h-12 rounded-full mr-4" />
                     <div>
                       <p className="font-semibold">{member.name}</p>
-                      <p className="text-sm text-gray-500">{member.role}</p>
+                      <p className="text-sm text-gray-500">{member?.role}</p>
                     </div>
                   </div>
                 ))}
@@ -204,56 +209,29 @@ const SingleNews = ({ params }) => {
             </div>
 
             {/* Screenshots */}
-            <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-6">Screenshots</h3>
-              <div className="grid grid-cols-2 gap-6">
-                {post.screenshots?.map((screenshot, index) => (
-                  <div key={index} className="relative group rounded-xl overflow-hidden shadow-md cursor-pointer" onClick={() => openModal(screenshot.src)}>
-                    <img
-                      src={screenshot.src}
-                      alt={screenshot.caption}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <p className="absolute bottom-2 left-2 text-white text-sm bg-black/60 px-2 py-1 rounded-lg">
-                      {screenshot.caption}
-                    </p>
-                  </div>
-                ))}
+            {post.screenshots && post.screenshots.length > 0 && (
+              <div className="mt-12">
+                <h3 className="text-xl font-semibold mb-6">Screenshots</h3>
+                <div className="grid grid-cols-2 gap-6">
+                  {post.screenshots.map((screenshot, index) => (
+                    <div key={index} className="relative group rounded-xl overflow-hidden shadow-md cursor-pointer" onClick={() => openModal(screenshot)}>
+                      <img
+                        src={screenshot} // Assuming screenshot is a URL here.
+                        alt={`Screenshot ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-
+            )}
             {/* Team Members */}
 
 
-            {/* Challenges */}
-            {/* <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-4">Challenges</h3>
-              <ul className="list-disc pl-5">
-                {post.challenges?.map((challenge, index) => (
-                  <li key={index}>{challenge}</li>
-                ))}
-              </ul>
-            </div> */}
 
-            {/* Solutions */}
-            {/* <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-4">Solutions</h3>
-              <ul className="list-disc pl-5">
-                {post.solutions?.map((solution, index) => (
-                  <li key={index}>{solution}</li>
-                ))}
-              </ul>
-            </div> */}
 
             {/* Future Enhancements */}
-            {/* <div className="mt-12">
-              <h3 className="text-xl font-semibold mb-4">Future Enhancements</h3>
-              <ul className="list-disc pl-5">
-                {post.futureEnhancements?.map((enhancement, index) => (
-                  <li key={index}>{enhancement}</li>
-                ))}
-              </ul>
-            </div> */}
+
           </div>
         </div>
 
@@ -271,4 +249,4 @@ const SingleNews = ({ params }) => {
   );
 };
 
-export default SingleNews;
+export default SinglePortfolio;

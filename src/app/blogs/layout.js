@@ -11,7 +11,7 @@ export const metadata = {
     description:
       'Stay updated with 24XDEV’s latest insights on web development, design, and digital solutions. Elevate your online presence with expert knowledge.',
     images: ['/img/main-logo.jpg'],
-    url: 'https://24xdev.uk/blogs',
+    url: 'https://24xdev.co.uk/blogs',
     type: 'website',
   },
   twitter: {

@@ -76,10 +76,10 @@ const FooterLinks = () => {
       <h4 className="font-semibold mt-4" style={{ color: currentTheme.colors.text }}>Contact Us</h4>
       <p style={{ color: currentTheme.colors.text }}>
         24XDEV HQ <br />
-        New York, NY 535022 <br />
-        United States <br />
-        <strong style={{ color: currentTheme.colors.text }}>Phone:</strong> +1 5589 55488 55 <br />
-        <strong style={{ color: currentTheme.colors.text }}>Email:</strong> contact@24xdev.com <br />
+        Jalandhar <br />
+        Punjab <br />
+        <strong style={{ color: currentTheme.colors.text }}>Phone:</strong> +919877371074 <br />
+        <strong style={{ color: currentTheme.colors.text }}>Email:</strong> gsingh07@outlook.in <br />
       </p>
       <SocialLinks />
     </div>

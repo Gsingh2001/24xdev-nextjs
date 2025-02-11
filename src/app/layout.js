@@ -17,7 +17,7 @@ export const metadata = {
     description:
       "24XDEV is committed to delivering tailored web solutions, offering web development, design, hosting, deployment, and maintenance for a strong digital presence.",
     images: ["/img/main-logo.png"],
-    url: "https://24xdev.uk",
+    url: "https://24xdev.co.uk",
     type: "website",
     siteName: "24XDEV",
   },
@@ -33,7 +33,7 @@ export const metadata = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "24XDEV",
-    url: "https://24xdev.uk",
+    url: "https://24xdev.co.uk",
     logo: "/img/main-logo.png",
     contactPoint: {
       "@type": "ContactPoint",

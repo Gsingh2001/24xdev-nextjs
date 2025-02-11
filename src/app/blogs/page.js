@@ -50,27 +50,27 @@ const BlogPage = () => {
         <div className="grid lg:grid-cols-2 gap-8">
           {posts.length > 0 && (
             <div className="relative group h-full" style={{ overflow: "hidden" }}>
-              <Link href={`/blog/${posts[0].id}`}>
+              <Link href={`/blog/${posts[1].id}`}>
                 <img
                   className="w-full h-full object-fill rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
-                  src={posts[0].main_image}
-                  alt={posts[0].title}
+                  src={posts[1].main_image}
+                  alt={posts[1].title}
                 />
               </Link>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg p-6 flex flex-col justify-end">
-                <Link href={`/blog/${posts[0].id}`}>
+                <Link href={`/blog/${posts[1].id}`}>
                   <h2
                     className="text-4xl font-semibold text-white mb-4"
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(limitWords(posts[0].title, 8)) }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(limitWords(posts[1].title, 8)) }}
                   />
                 </Link>
                 <p
                   className="text-gray-200 mb-4"
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(limitWords(posts[0].content[0], 20)) }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(limitWords(posts[1].content, 20)) }}
                 />
                 <div className="flex items-center text-gray-300 text-sm">
                   <div className="h-3 w-1 bg-red-600 mr-2"></div>
-                  {limitWords(posts[0].category, 2)}
+                  {limitWords(posts[1].category, 2)}
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ const BlogPage = () => {
             <AdditionalLayout
               key={category.id}
               category={category}
-              posts={posts.filter(post => post.category.includes(category.name))}
+              posts={posts.filter(post => post.category.includes(category[0]))}
               limitWords={limitWords}
             />
         ))}
