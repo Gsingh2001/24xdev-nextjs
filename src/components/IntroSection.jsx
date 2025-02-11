@@ -48,6 +48,8 @@ const IntroSection = ({ currentTheme }) => {
             alt="Illustration showcasing comprehensive web solutions provided by 24XDEV"
             className="w-full h-auto max-w-md transition-transform duration-500 transform hover:scale-105"
             loading="lazy"
+            width={100}
+            height={100}
           />
         </div>
       </div>

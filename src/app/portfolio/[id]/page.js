@@ -32,6 +32,7 @@ const ImageModal = ({ isOpen, imageSrc, onClose }) => {
           ×
         </button>
         <Image
+        width="2400" height="2000"
           src={imageSrc}
           alt="Large view"
           className="w-full h-full object-contain"
@@ -111,7 +112,8 @@ const SinglePortfolio = ({ params }) => {
             <Image
               className="w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-105"
               src={post.imgSrc}
-              alt={post.alt || post.title}
+              alt={post.alt || post.title} 
+              width="2400" height="2000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
               <h1
@@ -199,7 +201,7 @@ const SinglePortfolio = ({ params }) => {
               <div className="grid grid-cols-2 gap-6">
                 {post.teamMembers?.map((member, index) => (
                   <div key={index} className="flex items-center">
-                    <Image src={member.image} alt={member.name} className="w-12 h-12 rounded-full mr-4" />
+                    <Image src={member.image} alt={member.name} width="2400" height="2000" className="w-12 h-12 rounded-full mr-4" />
                     <div>
                       <p className="font-semibold">{member.name}</p>
                       <p className="text-sm text-gray-500">{member?.role}</p>
@@ -220,6 +222,7 @@ const SinglePortfolio = ({ params }) => {
                         src={screenshot} // Assuming screenshot is a URL here.
                         alt={`Screenshot ${index + 1}`}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      width="2400" height="2000"
                       />
                     </div>
                   ))}

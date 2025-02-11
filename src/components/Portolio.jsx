@@ -81,6 +81,7 @@ const Portfolio = ({ currentTheme }) => {
                   alt={item.alt || item.title} // Use `alt` or fallback to `title`
                   className="img-fluid w-full h-64 object-cover"
                   loading="lazy"
+                  width="2400" height="2000"
                 />
 
                 {/* Hover Overlay */}

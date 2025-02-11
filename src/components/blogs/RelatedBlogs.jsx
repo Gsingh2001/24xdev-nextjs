@@ -84,6 +84,7 @@ const RelatedBlogs = ({ category, currentBlogId }) => {
                   <Image
                     src={blog.main_image || '/path/to/fallback-image.jpg'} // Fallback image
                     alt={safeTitle}
+                    width="2400" height="2000"
                     className="w-20 h-20 object-cover rounded-lg mr-3 transition-transform duration-200 transform hover:scale-105"
                   />
                   <div className="flex-1">

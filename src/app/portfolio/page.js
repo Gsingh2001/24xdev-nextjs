@@ -86,7 +86,7 @@ const PortfolioContent = () => {
         {paginatedProjects.map((project) => (
           <div key={project.id} className="border p-4 rounded-lg shadow">
             <Link href={`/portfolio/${project.id}`}>
-              <Image className="w-full h-56 object-cover rounded" src={project.imgSrc} alt={project.title} />
+              <Image className="w-full h-56 object-cover rounded" width="2400" height="2000" src={project.imgSrc} alt={project.title} />
               <h3 className="text-lg font-bold mt-2">{project.title}</h3>
               <p className="text-sm text-gray-600">{project.category}</p>
             </Link>

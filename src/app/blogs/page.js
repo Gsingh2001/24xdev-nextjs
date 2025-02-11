@@ -56,6 +56,7 @@ const BlogPage = () => {
                   className="w-full h-full object-fill rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                   src={posts[1].main_image}
                   alt={posts[1].title}
+                  width="2400" height="2000"
                 />
               </Link>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg p-6 flex flex-col justify-end">
@@ -84,6 +85,7 @@ const BlogPage = () => {
                     className="w-full object-fill rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                     src={post.main_image}
                     alt={post.title}
+                    width="2400" height="2000"
                   />
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg p-4 flex flex-col justify-end">

@@ -93,6 +93,7 @@ const SingleNews = ({ params }) => {
               className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-105"
               src={post.main_image}
               alt={post.title}
+              width="2400" height="2000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end">
               <h1

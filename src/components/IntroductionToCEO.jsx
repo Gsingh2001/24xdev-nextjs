@@ -18,6 +18,7 @@ const IntroductionToCEO = () => {
             <div className={`flex flex-col lg:flex-row items-center justify-center mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-10 rounded-lg shadow-lg space-y-8 lg:space-y-0 lg:space-x-10`}>
                 <div className="flex-shrink-0">
                     <Image
+                    width="2400" height="2000"
                         src={ceo.imgSrc}
                         alt={ceo.name}
                         className="w-40 h-40 rounded-full border-4 border-blue-500 transform transition-transform duration-500"

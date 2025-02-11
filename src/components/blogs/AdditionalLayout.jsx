@@ -43,6 +43,7 @@ const AdditionalLayout = ({ category, posts, limitWords }) => {
                       className="w-full h-56 object-cover rounded-t-lg"
                       src={post.main_image}
                       alt={post.title}
+                      width="2400" height="2000"
                     />
                   </Link>
                 ) : (
@@ -50,6 +51,7 @@ const AdditionalLayout = ({ category, posts, limitWords }) => {
                     className="w-full h-56 object-cover rounded-t-lg"
                     src={post.main_image}
                     alt={post.title}
+                    width="2400" height="2000"
                   />
                 )}
                 <div className="p-4 flex-grow">

@@ -17,6 +17,7 @@ const AboutSection = ({ currentTheme }) => {
         <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
           <div className="w-full lg:w-5/12 md:w-1/2 mb-6 lg:mb-0 flex-shrink-0">
             <Image
+            width="2400" height="2000"
               src="/img/pexels-fauxels-3182834.jpg"
               alt="Team at 24XDEV collaborating on comprehensive web solutions"
               className="rounded-lg shadow-lg w-full h-auto object-cover"

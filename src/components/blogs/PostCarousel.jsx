@@ -52,6 +52,7 @@ const PostCarousel = ({ category, posts, limitWords }) => {
                                             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                                             src={post.main_image}
                                             alt={post.title}
+                                            width="2400" height="2000"
                                         />
                                     {/* </Link> */}
                                     <div className="p-4">

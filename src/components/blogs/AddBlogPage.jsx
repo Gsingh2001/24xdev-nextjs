@@ -343,6 +343,7 @@ function AddBlogPage({ showToast }) {
                                                     src={URL.createObjectURL(image)}
                                                     alt={`preview-${index}`}
                                                     className="w-32 h-32 object-cover rounded-md"
+                                                    width="2400" height="2000"
                                                 />
                                                 <button
                                                     type="button"
