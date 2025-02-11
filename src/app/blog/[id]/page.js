@@ -21,7 +21,7 @@ const SingleNews = ({ params }) => {
 
   const router = useRouter();
   const { id } = React.use(params);
-  
+
   useEffect(() => {
     if (!id) return;
 
@@ -84,7 +84,7 @@ const SingleNews = ({ params }) => {
   return (
     <div className="py-12" style={{ backgroundColor: currentTheme.colors.background }}>
       <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
-        
+
         {/* Left Column - Main Post Content */}
         <div className="lg:w-2/3 w-full">
           {/* Post Header */}
@@ -118,10 +118,10 @@ const SingleNews = ({ params }) => {
           <div className="text-lg leading-relaxed space-y-6" style={{ color: currentTheme.colors.text }}>
             {post.content?.map((paragraph, index) => (
               <div key={index}>
-                <ReactMarkdown 
-                  children={paragraph} 
-                  remarkPlugins={[remarkGfm]} // Enabling GitHub-flavored markdown
-                />
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {paragraph}
+                </ReactMarkdown>
+
               </div>
             ))}
           </div>

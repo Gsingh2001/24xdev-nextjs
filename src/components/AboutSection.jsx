@@ -54,7 +54,7 @@ const AboutSection = ({ currentTheme }) => {
                 className="mb-4 text-sm md:text-base"
                 style={{ color: currentTheme.colors.text }}
               >
-                Our experienced team at <strong>24XDEV</strong> is committed to innovation and excellence, working to deliver top-notch results and support at every stage of your website's lifecycle. Our services include:
+                Our experienced team at <strong>24XDEV</strong> is committed to innovation and excellence, working to deliver top-notch results and support at every stage of your website&rsquo;s lifecycle. Our services include:
               </p>
 
               <ul
@@ -82,8 +82,9 @@ const AboutSection = ({ currentTheme }) => {
                   className="text-lg md:text-xl font-semibold"
                   style={{ color: currentTheme.colors.primary }}
                 >
-                  Let’s Build Something Great Together with 24XDEV
+                  Let&rsquo;s Build Something Great Together with 24XDEV
                 </h4>
+
               </footer>
             </article>
           </div>

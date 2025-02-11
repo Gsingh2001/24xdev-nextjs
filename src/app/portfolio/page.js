@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, Suspense } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../../firebase";
 import { useTheme } from "@/app/assets/ThemeContext";
@@ -7,10 +8,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-const Portfolio = () => {
+const PortfolioContent = () => {
   const { currentTheme } = useTheme();
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // This needs a suspense boundary
 
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -28,7 +29,7 @@ const Portfolio = () => {
       const projectsArray = data
         ? Object.keys(data).map((key) => ({ id: key, ...data[key] }))
         : [];
-      
+
       setProjects(projectsArray);
       setFilteredProjects(projectsArray);
       setCategories(["all", ...new Set(projectsArray.map((p) => p.category))]);
@@ -66,7 +67,7 @@ const Portfolio = () => {
   return (
     <div style={{ backgroundColor: currentTheme.colors.background, color: currentTheme.colors.text }} className="container mx-auto py-12 px-4">
       <h1 className="text-4xl font-extrabold text-center" style={{ color: currentTheme.colors.primary }}>My Portfolio</h1>
-      
+
       {/* Category Filter */}
       <div className="flex justify-center gap-4 my-6">
         {categories.map((category) => (
@@ -106,6 +107,14 @@ const Portfolio = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const Portfolio = () => {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
+      <PortfolioContent />
+    </Suspense>
   );
 };
 

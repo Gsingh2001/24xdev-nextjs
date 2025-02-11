@@ -105,7 +105,7 @@ const ContactForm = () => {
   return (
     <div>
       <h4 className="font-semibold" style={{ color: currentTheme.colors.text }}>Send Us a Message</h4>
-      <p style={{ color: currentTheme.colors.text }}>Got a question? Whether you need help with a project or want to learn more about our services, feel free to reach out. We're here to assist clients from India, the UK, Canada, and beyond!</p>
+      <p style={{ color: currentTheme.colors.text }}>Got a question? Whether you need help with a project or want to learn more about our services, feel free to reach out. We&rsquo;re here to assist clients from India, the UK, Canada, and beyond!</p>
       <form action="" method="post" className="space-y-4">
         <input type="text" name="name" className="w-full p-2 rounded-md border border-gray-300" placeholder="Your Name" />
         <input type="email" className="w-full p-2 rounded-md border border-gray-300" name="email" placeholder="Your Email" />

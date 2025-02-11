@@ -191,8 +191,8 @@ const SinglePortfolio = ({ params }) => {
             </div>
             {post.clientTestimonial > 0 && <div className="mt-10">
               <h3 className="text-xl font-semibold mb-4">Client Testimonial</h3>
-              <blockquote className="italic ">"{post.clientTestimonial}"</blockquote>
-            </div>}
+              <blockquote className="italic">&quot;{post.clientTestimonial}&quot;</blockquote>
+              </div>}
 
             <div className="mt-12">
               <h3 className="text-xl font-semibold mb-4">Team Members</h3>

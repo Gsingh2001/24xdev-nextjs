@@ -17,7 +17,7 @@ const Pricing = ( { currentTheme }) => {
             Pricing Plans
           </h3>
           <p className="mt-4" style={{ color: currentTheme.colors.secondary }}>
-            Our flexible pricing plans are tailored to meet your needs, whether you're looking for basic web solutions or a comprehensive all-in-one package. We provide services for clients in India, the UK, and Canada.
+            Our flexible pricing plans are tailored to meet your needs, whether you&rsquo;re looking for basic web solutions or a comprehensive all-in-one package. We provide services for clients in India, the UK, and Canada.
           </p>
         </header>
 
