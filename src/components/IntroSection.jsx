@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 const IntroSection = ({ currentTheme }) => {
@@ -42,7 +43,7 @@ const IntroSection = ({ currentTheme }) => {
         <div
           className="md:w-1/2 order-first md:order-last flex justify-center transition-transform duration-500"
         >
-          <img
+          <Image
             src="/img/intro-img.svg"
             alt="Illustration showcasing comprehensive web solutions provided by 24XDEV"
             className="w-full h-auto max-w-md transition-transform duration-500 transform hover:scale-105"

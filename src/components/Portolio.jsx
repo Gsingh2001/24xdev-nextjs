@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
+import Image from 'next/image';
 
 const Portfolio = ({ currentTheme }) => {
   const [portfolioItems, setPortfolioItems] = useState([]);
@@ -75,7 +76,7 @@ const Portfolio = ({ currentTheme }) => {
               <div className="relative rounded-lg overflow-hidden shadow-md">
                 
                 {/* Portfolio Image */}
-                <img
+                <Image
                   src={item.imgSrc} // Use `imgSrc` field from Firebase data
                   alt={item.alt || item.title} // Use `alt` or fallback to `title`
                   className="img-fluid w-full h-64 object-cover"

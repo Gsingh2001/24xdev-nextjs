@@ -1,4 +1,5 @@
 import { useTheme } from '@/app/assets/ThemeContext';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -47,7 +48,7 @@ const PostCarousel = ({ category, posts, limitWords }) => {
                                     }}
                                 >
                                     {/* <Link href={post.link} className="block group"> */}
-                                        <img
+                                        <Image
                                             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                                             src={post.main_image}
                                             alt={post.title}

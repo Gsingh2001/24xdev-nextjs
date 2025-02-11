@@ -10,6 +10,7 @@ import 'react-quill/dist/quill.snow.css'; // Import the Quill CSS
 import { IoClose } from 'react-icons/io5'; // Import close icon
 import PropTypes from 'prop-types'; // Import prop-types for validation
 import { SketchPicker } from 'react-color'; // Import color picker
+import Image from 'next/image';
 
 function AddBlogPage({ showToast }) {
     const [user, setUser] = useState(null);
@@ -338,7 +339,7 @@ function AddBlogPage({ showToast }) {
                                     <div className="mt-2 flex flex-wrap gap-2">
                                         {formData.images.map((image, index) => (
                                             <div key={index} className="relative">
-                                                <img
+                                                <Image
                                                     src={URL.createObjectURL(image)}
                                                     alt={`preview-${index}`}
                                                     className="w-32 h-32 object-cover rounded-md"

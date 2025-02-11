@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify'; // Import DOMPurify
 import { db } from "../../firebase";
 import { useTheme } from "@/app/assets/ThemeContext"; // Import the custom hook
+import Image from "next/image";
 
 const RelatedPortfolio = ({ category, currentBlogId }) => {
   const [relatedBlogs, setRelatedBlogs] = useState([]);
@@ -80,7 +81,7 @@ const RelatedPortfolio = ({ category, currentBlogId }) => {
             >
               <Link href={`/portfolio/${blog.id}`}>
                 <div className="flex items-start p-3 cursor-pointer hover:bg-gray-50 transition-colors duration-200">
-                  <img
+                  <Image
                     src={blog.imgSrc || '/path/to/fallback-image.jpg'} // Fallback image
                     alt={safeTitle}
                     className="w-20 h-20 object-cover rounded-lg mr-3 transition-transform duration-200 transform hover:scale-105"

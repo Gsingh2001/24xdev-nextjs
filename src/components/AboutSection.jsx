@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 
@@ -15,7 +16,7 @@ const AboutSection = ({ currentTheme }) => {
       <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-32">
         <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
           <div className="w-full lg:w-5/12 md:w-1/2 mb-6 lg:mb-0 flex-shrink-0">
-            <img
+            <Image
               src="/img/pexels-fauxels-3182834.jpg"
               alt="Team at 24XDEV collaborating on comprehensive web solutions"
               className="rounded-lg shadow-lg w-full h-auto object-cover"

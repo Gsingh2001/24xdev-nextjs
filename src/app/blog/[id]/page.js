@@ -6,6 +6,7 @@ import { db } from '../../../../firebase';
 import { useTheme } from '@/app/assets/ThemeContext';
 import ReactMarkdown from 'react-markdown'; // Import react-markdown
 import remarkGfm from 'remark-gfm'; // GitHub-flavored markdown support
+import Image from 'next/image';
 
 // Dynamically import components
 const RelatedBlogs = React.lazy(() => import('@/components/blogs/RelatedBlogs'));
@@ -88,7 +89,7 @@ const SingleNews = ({ params }) => {
         <div className="lg:w-2/3 w-full">
           {/* Post Header */}
           <div className="relative group h-80 mb-8 rounded-lg overflow-hidden shadow-lg">
-            <img
+            <Image
               className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-105"
               src={post.main_image}
               alt={post.title}

@@ -1,4 +1,5 @@
 import { useTheme } from '@/app/assets/ThemeContext';
+import Image from 'next/image';
 import React from 'react';
 import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
@@ -16,7 +17,7 @@ const IntroductionToCEO = () => {
         <section className="py-16 px-4 md:px-16" style={{ backgroundColor: currentTheme.colors.background }}>
             <div className={`flex flex-col lg:flex-row items-center justify-center mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-10 rounded-lg shadow-lg space-y-8 lg:space-y-0 lg:space-x-10`}>
                 <div className="flex-shrink-0">
-                    <img
+                    <Image
                         src={ceo.imgSrc}
                         alt={ceo.name}
                         className="w-40 h-40 rounded-full border-4 border-blue-500 transform transition-transform duration-500"

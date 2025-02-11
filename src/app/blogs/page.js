@@ -6,6 +6,7 @@ import { ref, onValue } from "firebase/database"; // Import necessary Firebase f
 import { useTheme } from '../assets/ThemeContext';
 import AdditionalLayout from '@/components/blogs/AdditionalLayout';
 import { db } from '../../../firebase';
+import Image from 'next/image';
 
 const BlogPage = () => {
   const [posts, setPosts] = useState([]);
@@ -51,7 +52,7 @@ const BlogPage = () => {
           {posts.length > 0 && (
             <div className="relative group h-full" style={{ overflow: "hidden" }}>
               <Link href={`/blog/${posts[1].id}`}>
-                <img
+                <Image
                   className="w-full h-full object-fill rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                   src={posts[1].main_image}
                   alt={posts[1].title}
@@ -79,7 +80,7 @@ const BlogPage = () => {
             {posts.slice(1, 5).map((post) => (
               <article key={post.id} className="relative group h-full" style={{ overflow: "hidden" }}>
                 <Link href={`/blog/${post.id}`}>
-                  <img
+                  <Image
                     className="w-full object-fill rounded-lg transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                     src={post.main_image}
                     alt={post.title}

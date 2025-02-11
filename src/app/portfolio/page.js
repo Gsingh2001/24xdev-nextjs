@@ -5,6 +5,7 @@ import { db } from "../../../firebase";
 import { useTheme } from "@/app/assets/ThemeContext";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const Portfolio = () => {
   const { currentTheme } = useTheme();
@@ -84,7 +85,7 @@ const Portfolio = () => {
         {paginatedProjects.map((project) => (
           <div key={project.id} className="border p-4 rounded-lg shadow">
             <Link href={`/portfolio/${project.id}`}>
-              <img className="w-full h-56 object-cover rounded" src={project.imgSrc} alt={project.title} />
+              <Image className="w-full h-56 object-cover rounded" src={project.imgSrc} alt={project.title} />
               <h3 className="text-lg font-bold mt-2">{project.title}</h3>
               <p className="text-sm text-gray-600">{project.category}</p>
             </Link>

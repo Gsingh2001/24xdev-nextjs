@@ -6,6 +6,7 @@ import { ref, onValue } from "firebase/database";
 import { db } from "../../../../firebase";
 import { useTheme } from "@/app/assets/ThemeContext";
 import Link from "next/link";
+import Image from "next/image";
 
 // Dynamically import components
 const RelatedPortfolio = React.lazy(() => import("@/components/RelatedPortfolio"));
@@ -30,7 +31,7 @@ const ImageModal = ({ isOpen, imageSrc, onClose }) => {
         >
           ×
         </button>
-        <img
+        <Image
           src={imageSrc}
           alt="Large view"
           className="w-full h-full object-contain"
@@ -107,7 +108,7 @@ const SinglePortfolio = ({ params }) => {
         <div className="lg:w-2/3 w-full">
           {/* Post Header */}
           <div className="relative group h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <img
+            <Image
               className="w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-105"
               src={post.imgSrc}
               alt={post.alt || post.title}
@@ -198,7 +199,7 @@ const SinglePortfolio = ({ params }) => {
               <div className="grid grid-cols-2 gap-6">
                 {post.teamMembers?.map((member, index) => (
                   <div key={index} className="flex items-center">
-                    <img src={member.image} alt={member.name} className="w-12 h-12 rounded-full mr-4" />
+                    <Image src={member.image} alt={member.name} className="w-12 h-12 rounded-full mr-4" />
                     <div>
                       <p className="font-semibold">{member.name}</p>
                       <p className="text-sm text-gray-500">{member?.role}</p>
@@ -215,7 +216,7 @@ const SinglePortfolio = ({ params }) => {
                 <div className="grid grid-cols-2 gap-6">
                   {post.screenshots.map((screenshot, index) => (
                     <div key={index} className="relative group rounded-xl overflow-hidden shadow-md cursor-pointer" onClick={() => openModal(screenshot)}>
-                      <img
+                      <Image
                         src={screenshot} // Assuming screenshot is a URL here.
                         alt={`Screenshot ${index + 1}`}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"

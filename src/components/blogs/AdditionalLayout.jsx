@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link'; // Import Next.js Link component
 import { useTheme } from '@/app/assets/ThemeContext';
+import Image from 'next/image';
 
 const AdditionalLayout = ({ category, posts, limitWords }) => {
   const { currentTheme } = useTheme(); // Access the current theme
@@ -38,14 +39,14 @@ const AdditionalLayout = ({ category, posts, limitWords }) => {
               >
                 {postId ? (
                   <Link href={`/blog/${postId}`}>
-                    <img
+                    <Image
                       className="w-full h-56 object-cover rounded-t-lg"
                       src={post.main_image}
                       alt={post.title}
                     />
                   </Link>
                 ) : (
-                  <img
+                  <Image
                     className="w-full h-56 object-cover rounded-t-lg"
                     src={post.main_image}
                     alt={post.title}
