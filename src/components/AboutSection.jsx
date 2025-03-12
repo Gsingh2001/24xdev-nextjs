@@ -71,8 +71,8 @@ const AboutSection = ({ currentTheme }) => {
                   { title: "Maintenance", description: "Offering ongoing support with regular updates, security enhancements, and troubleshooting to keep your site optimized and secure." },
                   { title: "All-in-One Solutions", description: "Providing an end-to-end service that takes care of your website’s lifecycle, allowing you to focus on scaling your business." },
                 ].map((service, index) => (
-                  <li key={index} className="flex items-center">
-                    <AiOutlineCheckCircle size={20} color={currentTheme.colors.accent} aria-hidden="true" />
+                  <li key={index} className="flex">
+                    <AiOutlineCheckCircle className='mt-1 min-w-3' size={20} color={currentTheme.colors.accent} aria-hidden="true" />
                     <span className="ml-2"><strong>{service.title}</strong>: {service.description}</span>
                   </li>
                 ))}

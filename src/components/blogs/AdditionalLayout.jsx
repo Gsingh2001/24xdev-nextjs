@@ -16,7 +16,7 @@ const AdditionalLayout = ({ category, posts, limitWords }) => {
     >
       <div className="container mx-auto px-4">
         <h2
-          className="text-3xl font-bold mb-4 flex items-center"
+          className="text-3xl font-bold mb-1 flex items-center"
           style={{ color: currentTheme.colors.text }}
         >
           <span

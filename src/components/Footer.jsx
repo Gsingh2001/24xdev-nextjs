@@ -52,9 +52,9 @@ const FooterNewsletter = () => {
     <div>
       <h4 className="font-semibold" style={{ color: currentTheme.colors.text }}>Join Our Newsletter</h4>
       <p style={{ color: currentTheme.colors.text }}>Stay updated on the latest trends in website design, development, and digital solutions. Subscribe to our newsletter for insights, tips, and exclusive offers.</p>
-      <form action="" method="post">
+      <form action="" method="post" className='mt-5'>
         <input type="email" name="email" placeholder="Enter your email" className="p-2 rounded-md border border-gray-300" />
-        <input type="submit" value="Subscribe" className="ml-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" />
+        <input type="submit" value="Subscribe" className="ml-2 p-2 lg:mt-3 lg:ml-0 2xl:ml-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" />
       </form>
     </div>
   );
@@ -78,7 +78,7 @@ const FooterLinks = () => {
         24XDEV HQ <br />
         Jalandhar <br />
         Punjab <br />
-        <strong style={{ color: currentTheme.colors.text }}>Phone:</strong> +919877371074 <br />
+        <strong style={{ color: currentTheme.colors.text }}>Phone:</strong> +44 7553 189857 <br />
         <strong style={{ color: currentTheme.colors.text }}>Email:</strong> gsingh07@outlook.in <br />
       </p>
       <SocialLinks />
@@ -106,12 +106,12 @@ const ContactForm = () => {
     <div>
       <h4 className="font-semibold" style={{ color: currentTheme.colors.text }}>Send Us a Message</h4>
       <p style={{ color: currentTheme.colors.text }}>Got a question? Whether you need help with a project or want to learn more about our services, feel free to reach out. We&rsquo;re here to assist clients from India, the UK, Canada, and beyond!</p>
-      <form action="" method="post" className="space-y-4">
+      <form action="" method="post" className="space-y-4 mt-5">
         <input type="text" name="name" className="w-full p-2 rounded-md border border-gray-300" placeholder="Your Name" />
         <input type="email" className="w-full p-2 rounded-md border border-gray-300" name="email" placeholder="Your Email" />
         <input type="text" className="w-full p-2 rounded-md border border-gray-300" name="subject" placeholder="Subject" />
         <textarea className="w-full p-2 rounded-md border border-gray-300" name="message" rows="5" placeholder="Message"></textarea>
-        <div className="text-center">
+        <div className="text-center lg:text-left">
           <button type="submit" className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Send Message</button>
         </div>
       </form>
